@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Problems</title>
+    <script>
+        //Accessing each list element (Traversal)
+        list = [9, 45, 2, 8, 45, 23, 7, 78, 0, 11, 41, 77];
+
+        //Transveral Search
+        function traversal(list) {
+            for (i = 0; i < list.length - 1; i++) {
+                console.log(list[i]);
+            }
+            const traversalL = document.getElementById("traversalL");
+            traversalL.innerHTML = list.map(i => `<li>${i}</li>`).join('');
+        }
+
+        ///Display
+        function getElement() {
+            let element = document.getElementById('element').value
+            //alert(element);
+            if (element < list.length && typeof parseInt(element) === "number") {
+                alert(`Array[${element}] is ${list[element]}`)
+            }
+            else {
+                alert('List beyond Exceed')
+            }
+        }
+
+        //Insert New Element
+        function insertElement() {
+            let data = [60, 30, 3, 9, 10, 50];
+            let newE = document.getElementById("newE").value;
+            newE = parseInt(newE);
+            let pos = document.getElementById("pos").value;
+            pos = parseInt(pos) - 1;
+            if (typeof (newE) == "number" && typeof (pos) == "number" && pos < data.length) {
+                for (let i = data.length - 1; i >= pos; i--) {
+                    console.log(i)
+                    if (i >= pos) {
+                        data[i + 1] = data[i];
+                        if (i == pos) {
+                            data[i] = newE
+                            console.log(data[i])
+                        }
+                    }
+                }
+                data = `data = [${[data]}]`
+                document.getElementById("insert").innerHTML = data;
+            }
+            else {
+                alert("Invalid Data")
+            }
+
+        }
+
+        //Remove ELements
+        function removeElement() {
+            let list = [10, 20, 30, 12, 19, 92];
+            let position = document.getElementById('Dpos').value;
+            position = position - 1;
+            if (typeof parseInt(position) === "number" && position < list.length) {
+                for (i = position; i < list.length; i++) {
+                    list[i] = list[i + 1];
+                }
+                list.length = list.length - 1;
+                list = list;
+                list = `list = [${[list]}]`
+                document.getElementById("delete").innerHTML = list;
+            }
+            else {
+                alert("Invalid Data")
+            }
+            list = list;
+
+        }
+
+        //Linear Serach
+        function linearSearch() {
+            list = [20, 30, 10, 5, 50, 100];
+            let Sindex = document.getElementById('Sindex').value;
+            if (typeof parseInt(Sindex) === "number") {
+                for (i = 0; i < list.length; i++) {
+                    if (list[i] == Sindex) {
+                        alert('Item found');
+                        let index = i;
+                        alert(`Index of ${Sindex} is on index ${index + 1}`)
+                        break;
+                    }
+                    else {
+                        alert("Not found")
+                    }
+                }
+            }
+            else {
+                alert("Enter valid Element")
+            }
+        }
+
+        //Merge two Arrays
+        function mergeArrayS(arr1, arr2) {
+            arr1 = [9, 12, 13, 50];
+            arr2 = [17, 20, 30, 50, 70];
+            let result = [];
+            for (i = 0; i < arr1.length; i++) {
+                result[i] = arr1[i]
+            }
+            for (i = 0; i < arr2.length; i++) {
+                result[arr1.length + i] = arr2[i]
+            }
+            let mergeS = document.getElementById('mArrayS').innerHTML = `arr3=[${result}]`;
+        }
+
+        //Bubble Sort
+        function bubbleSort(arr1, arr2) {
+            arr1 = [9, 12, 13, 50];
+            arr2 = [17, 20, 30, 50, 70];
+            let result = [];
+            for (i = 0; i < arr1.length; i++) {
+                result[i] = arr1[i]
+            }
+            for (i = 0; i < arr2.length; i++) {
+                result[arr1.length + i] = arr2[i]
+            }
+            console.log(result)
+            const bubble = bubbleSorting(result);
+            console.log(bubble);
+            let barrays = document.getElementById('barrays').innerHTML = `arr=[${bubble}]`;
+        }
+        let bubbleSorting = (inputArr) => {
+            let len = inputArr.length;
+            for (let i = 0; i < len; i++) {
+                for (let j = 0; j < len; j++) {
+                    if (inputArr[j] > inputArr[j + 1]) {
+                        let tmp = inputArr[j];
+                        inputArr[j] = inputArr[j + 1];
+                        inputArr[j + 1] = tmp;
+                    }
+                }
+            }
+            return inputArr;
+        };
+
+        ///Merge Sort
+
+        function mergeSort(array) {
+            if (array.length <= 1) {
+                return array
+            }
+            const mid = Math.floor(array.length / 2);
+            const left = array.slice(0, mid);
+            const right = array.slice(mid)
+            return merge(mergeSort(left), mergeSort(right));
+        }
+
+        function merge(left, right) {
+            const array = [];
+            while (left.length && right.length) {
+                if (left[0] < right[0]) {
+                    array.push(left.shift())
+                }
+                else {
+                    array.push(right.shift())
+                }
+            }
+            return [...array, ...left, ...right];
+        }
+
+        function arrayList() {
+            const array = [9, 12, 13, 50, 17, 20, 30, 50, 70];
+            const merge = mergeSort(array);
+            let mergeSortA = document.getElementById('mergeSortA').innerHTML = `arr=[${merge}]`;
+        }
+
+        ///Recursion
+        function fact(num) {
+            if (num == 0) {
+                return 1;
+            }
+            return num * fact(num - 1);            
+        }
+
+        function factRecursion() {
+            num = document.getElementById('value_R').value;
+            let result = fact(num);
+            let resultRec = document.getElementById('resultRec').innerHTML = `Result=${result}`;
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <h3>list = [9, 45, 2, 8, 45, 23, 7, 78, 0, 11, 41, 77]</h3>
+    <h4>Traversal List</h4>
+    <button onclick="traversal(list = [9, 45, 2, 8, 45, 23, 7, 78, 0, 11, 41, 77])">Display List Elements</button>
+    <ul id="traversalL"></ul>
+
+    <h4>Accessing List</h4>
+    <input type="text" id='element' />
+    <button onclick="getElement()">Get Element</button>
+
+    <h4>Array Item Insert</h4>
+    <h3 id="insert">data = [60, 30, 3, 9, 10, 50]</h3>
+    <input type="number" placeholder="Enter positions" id="pos" />
+    <input type="number" placeholder="Enter New Element" id="newE" />
+    <button onclick="insertElement()">Press Positon to insert</button>
+    <h5>Items can be added using splice</h5>
+    <p>
+        array.splice(index, howmany item to be delete, item1, ....., itemX)
+        <br />
+        data1 = [60, 30, 3, 9, 10, 50];
+        <br />
+        data1.splice(2, 0, 90)
+    </p>
+    <br />
+
+    <h4>Array Item delete</h4>
+    <h3 id="delete">list = [10,20, 30, 12, 19, 92]</h3>
+    <input type="number" placeholder="Enter positions" id="Dpos" />
+    <button onclick="removeElement()">Press Postion to Delete</button>
+    <h5>Items can be deleted using splice</h5>
+    <p>
+        array.splice(index, howmany item to be delete, item1, ....., itemX)
+        <br />
+        const myArray = [10,20, 30, 12, 19, 92];
+        <br />
+        const x = myArray.splice(1, 1);
+    </p>
+    <br />
+
+    <h4>Array Item Linear Search</h4>
+    <h3 id="delete">list = [20, 30, 10, 5, 50, 100]</h3>
+    <input type="number" placeholder="Enter Item" id="Sindex" />
+    <button onclick="linearSearch()">Press item to Search</button>
+    <h5>Items can be deleted using splice</h5>
+    <p>
+        array.findIndex(CALLBACK())
+        <br />
+        const myArray = [10,20, 30, 12, 19, 92];
+        <br />
+        myArray.findIndex((index) => index===10);
+        <br />
+        Includes function tells it the element exits inside array or not
+        <br />
+        myArray.includes(10);
+    </p>
+    <br />
+
+    <h4>Merge two array simple way</h4>
+    <h3>arr1=[9,12,13,50]</h3>
+    <h3>arr2=[17,20,30,50,70]</h3>
+    <h3 id="mArrayS">arr3=[];</h3>
+    <button onclick="mergeArrayS()">Press item to Search</button>
+    <h5>Items can be deleted using spread or concat or push</h5>
+    <p>
+        array1.concat(array2)
+        <br />
+        concat joins two or more items and return item of same type
+        <br />
+        array=concat(item1,item2,...,itemn)
+        <br />
+        arr3 = [...arr1,...arr2]
+        <br />
+        Spread operator ... allows to spread items inside an array. Two array items can be spread and can be used to
+        merge it's contents
+    </p>
+    <br />
+
+    <h4>Bubble sort</h4>
+    <h3>arr=[9,12,13,50,17,20,30,50,70]</h3>
+    <h3 id="barrays">arr=[];</h3>
+    <button onclick="bubbleSort()">Press to Bubble sort</button>
+    <p>
+        array1.concat(array2)
+        <br />
+        * Run a nested for loop to traverse the input array using two variables i and j, such that 0 ≤ i
+        < n-1 and 0 ≤ j < n-i-1 <br />
+        * If arr[j] is greater than arr[j+1] then swap these adjacent elements, else move on
+        <br />
+    </p>
+    <br />
+
+    <h4>Merge sort</h4>
+    <h3>arr=[9,12,13,50,17,20,30,50,70]</h3>
+    <h3 id="mergeSortA">arr=[];</h3>
+    <button onclick="arrayList()">Press to Merge sort</button>
+    <p>
+        array1.push()
+        <br />
+        * The push() method adds one or more elements to the end of an array and returns the new length of the array.
+        <br />
+        array.shift()
+        <br />
+        * The shift() method removes the first element from an array and returns that removed element. This method
+        changes the length of the array.
+        <br />
+    </p>
+    <br />
+
+    <h4>Recursion</h4>
+    <input type="number" id="value_R">
+    <h3 id="resultRec">Result</h3>
+    <button onclick="factRecursion()">Press to see factorial</button>
+    <br />
+</body>
+
+</html>
